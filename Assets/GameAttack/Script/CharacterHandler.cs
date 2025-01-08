@@ -43,11 +43,12 @@ namespace AttackTest.Character {
         public void InitCharacter(bool _isplayer)
         {
             IsPlayer = _isplayer;
+            healthCharacter.ispLayer = _isplayer;
             baseCharacter.CharacterIdle();
             state = StateSliding.Idle;
             SetupScaleRotation();
             healthCharacter.InitHelath(
-                BattleHandler.instance.dtGame.GetDefaultHP(),
+                100f,
                 BattleHandler.instance.dtGame.GetRandomeDamage(),
                 BattleHandler.instance.dtGame.GetRandomeDEF(),
                 BattleHandler.instance.dtGame.GetRandomeHealth(),

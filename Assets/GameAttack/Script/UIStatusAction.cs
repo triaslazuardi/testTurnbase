@@ -25,7 +25,52 @@ namespace AttackTest
         [SerializeField] private TMP_Text textDEF_Enemy;
         [SerializeField] private TMP_Text textHEALTH_Enemy;
 
-        //[Space][Header"BuutonAction"]
+
+        public void UpdateTextHP(bool isPlayer, int currentVal, int maxVal) {
+            if (isPlayer)
+            {
+                textHP_Player.text = $"{currentVal}/{maxVal}";
+            }
+            else {
+                textHP_Enemy.text = $"{currentVal}/{maxVal}";
+            }
+        }
+
+        public void UpdateTextATK(bool isPlayer, int currentVal)
+        {
+            if (isPlayer)
+            {
+                textATK_Player.text = $"{currentVal}";
+            }
+            else
+            {
+                textATK_Enemy.text = $"{currentVal}";
+            }
+        }
+
+        public void UpdateTextDEF(bool isPlayer, int currentVal)
+        {
+            if (isPlayer)
+            {
+                textDEF_Player.text = $"{currentVal}";
+            }
+            else
+            {
+                textDEF_Enemy.text = $"{currentVal}";
+            }
+        }
+
+        public void UpdateTextHEALTH(bool isPlayer, int currentVal)
+        {
+            if (isPlayer)
+            {
+                textHEALTH_Player.text = $"{currentVal}";
+            }
+            else
+            {
+                textHEALTH_Enemy.text = $"{currentVal}";
+            }
+        }
 
         public void OnActionAttack()
         {

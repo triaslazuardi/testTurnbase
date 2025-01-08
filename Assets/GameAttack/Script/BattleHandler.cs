@@ -13,7 +13,8 @@ namespace AttackTest {
         public static BattleHandler instance;
 
         public DataSO dtGame;
-        [SerializeField] private UIManage scrUi;
+        public UIManage scrUi;
+        public UIStatusAction scrState;
 
         [SerializeField] private List<CharacterHandler> prefabCharPlayer;
         [SerializeField] private List<CharacterHandler> prefabCharEnemy;

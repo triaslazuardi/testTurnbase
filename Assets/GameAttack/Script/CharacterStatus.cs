@@ -16,6 +16,7 @@ namespace AttackTest.Character {
 
         public SpriteRenderer fillBar;
         public bool isDEF = false;
+        public bool ispLayer = false;
 
         public void Operate(bool isActive)
         {
@@ -30,6 +31,10 @@ namespace AttackTest.Character {
             DEF = _DEF;
             HEALTH = _HEALTH;
             PlusVal = _PlusVal;
+
+            BattleHandler.instance.scrState.UpdateTextATK(ispLayer, (int)ATK);
+            BattleHandler.instance.scrState.UpdateTextDEF(ispLayer, (int)DEF);
+            BattleHandler.instance.scrState.UpdateTextHEALTH(ispLayer, (int)HEALTH);
         }
 
         public void GetDamage(float amount)
@@ -63,8 +68,14 @@ namespace AttackTest.Character {
             if (amount <= 0f)
             {
                 fillBar.size = new Vector2(0, 1);
+                BattleHandler.instance.scrState.UpdateTextHP(ispLayer, 0, 100);
             }
             else {
+                if (HP > 100f) { 
+                    HP = 100f;
+                }
+
+                BattleHandler.instance.scrState.UpdateTextHP(ispLayer, (int)HP, 100);
                 fillBar.size = new Vector2(amount / 100f, 1);
             }
         }
@@ -76,6 +87,10 @@ namespace AttackTest.Character {
                 ATK += PlusVal;
                 DEF += PlusVal;
                 HEALTH += PlusVal;
+
+                BattleHandler.instance.scrState.UpdateTextATK(ispLayer, (int)ATK);
+                BattleHandler.instance.scrState.UpdateTextDEF(ispLayer, (int)DEF);
+                BattleHandler.instance.scrState.UpdateTextHEALTH(ispLayer, (int)HEALTH);
 
                 return;
             }

@@ -16,7 +16,6 @@ namespace AttackTest.So {
         public Vector3 vecFx;
 
         [Space]
-        [SerializeField] private float HPVal;
         [SerializeField] private List<int> damageVal;
         [SerializeField] private List<float> defVal; 
         [SerializeField] private List<float> healthVal;
@@ -29,9 +28,6 @@ namespace AttackTest.So {
         [Header("Fx")]
         public FxManage fxBlood = null;
 
-        public float GetDefaultHP() { 
-            return HPVal;
-        }
 
         public float GetRandomeDamage() {
             return (float)damageVal[UnityEngine.Random.Range(0, damageVal.Count)];
