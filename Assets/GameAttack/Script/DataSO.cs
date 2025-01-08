@@ -15,24 +15,40 @@ namespace AttackTest.So {
         public float rangeDistance = 0;
         public Vector3 vecFx;
 
+        [Space]
+        [SerializeField] private float HPVal;
         [SerializeField] private List<int> damageVal;
-        [SerializeField] private bool isPlayerAlwaysWin;
+        [SerializeField] private List<float> defVal; 
+        [SerializeField] private List<float> healthVal;
+        [SerializeField] private List<float> increaseVal;
 
 
-        [Header("DelayNumber")]
+        [Space][Header("DelayNumber")]
         public float delay1 = 0.125f;
 
         [Header("Fx")]
         public FxManage fxBlood = null;
 
-        public int GetRandomeDamage() {
-            if (isPlayerAlwaysWin) {
-                return damageVal[0];
-            }
-            else
-            {
-                return damageVal[UnityEngine.Random.Range(0, damageVal.Count)];
-            }
+        public float GetDefaultHP() { 
+            return HPVal;
+        }
+
+        public float GetRandomeDamage() {
+            return (float)damageVal[UnityEngine.Random.Range(0, damageVal.Count)];
+        }
+
+        public float GetRandomeDEF() {
+            return defVal[UnityEngine.Random.Range(0, defVal.Count)];
+        }
+
+        public float GetRandomeHealth()
+        {
+            return healthVal[UnityEngine.Random.Range(0, healthVal.Count)];
+        }
+
+        public float GetRandomeIncrease()
+        {
+            return increaseVal[UnityEngine.Random.Range(0, increaseVal.Count)];
         }
     }
 }

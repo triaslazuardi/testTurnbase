@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DataGameSo
   m_EditorClassIdentifier: 
   distanceCharX: 15
-  distanceCharY: -5
+  distanceCharY: 0
   slideSpeed: 10
   reachedDistance: 0.1
   rangeDistance: 7

@@ -10,7 +10,7 @@ namespace AttackTest.Character {
     public class CharacterHandler : MonoBehaviour
     {
         [SerializeField] private CharacterBase baseCharacter;
-        [SerializeField] private CharacterHealth healthCharacter;
+        [SerializeField] private CharacterStatus healthCharacter;
         [SerializeField] private Transform transformCharacter;
         [SerializeField] private Transform transformSign;
 
@@ -46,7 +46,13 @@ namespace AttackTest.Character {
             baseCharacter.CharacterIdle();
             state = StateSliding.Idle;
             SetupScaleRotation();
-            healthCharacter.InitHelath(100);
+            healthCharacter.InitHelath(
+                BattleHandler.instance.dtGame.GetDefaultHP(),
+                BattleHandler.instance.dtGame.GetRandomeDamage(),
+                BattleHandler.instance.dtGame.GetRandomeDEF(),
+                BattleHandler.instance.dtGame.GetRandomeHealth(),
+                BattleHandler.instance.dtGame.GetRandomeIncrease()
+                );
         }
 
         public void SetupScaleRotation() {
@@ -72,10 +78,10 @@ namespace AttackTest.Character {
 
         public bool IsDie()
         {
-            return (healthCharacter.health <= 0);
+            return (healthCharacter.GetValHP() <= 0);
         }
 
-        public void Attack(CharacterHandler targetChar, UnityAction OnAttackComplete = null) {
+        public void AttackAction(CharacterHandler targetChar, UnityAction OnAttackComplete = null) {
             Vector3 slideTargetposition = targetChar.GetPosition() + (GetPosition() - targetChar.GetPosition()).normalized * BattleHandler.instance.dtGame.rangeDistance;
             Vector3 startingPosition = GetPosition();
             transformSign.gameObject.SetActive(true);
@@ -88,7 +94,8 @@ namespace AttackTest.Character {
                     var fxItem = LeanPool.Spawn(BattleHandler.instance.dtGame.fxBlood, targetChar.transform);
                     fxItem.transform.localPosition = BattleHandler.instance.dtGame.vecFx;
                     fxItem.RunFx();
-                    targetChar.healthCharacter.GetDamage(BattleHandler.instance.dtGame.GetRandomeDamage());
+                    //targetChar.healthCharacter.GetDamage(BattleHandler.instance.dtGame.GetRandomeDamage());
+                    targetChar.healthCharacter.GetDamage(healthCharacter.GetValATK());
                     SoundManager.instance.PlaySFX("attack");
                 }, () =>
                 {
@@ -101,6 +108,17 @@ namespace AttackTest.Character {
                     });
                 });
             });
+        }
+
+        public void DefenseAction(UnityAction OnAttackComplete = null) {
+            healthCharacter.GetDEF();
+            OnAttackComplete?.Invoke();
+        }
+
+        public void HealthAction(UnityAction OnAttackComplete = null)
+        {
+            healthCharacter.GetHEALTH();
+            OnAttackComplete?.Invoke();
         }
 
         private void SlideToPosition(Vector3 _targetPos, UnityAction _OnSlideComplete) { 

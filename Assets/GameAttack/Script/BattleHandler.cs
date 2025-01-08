@@ -17,8 +17,8 @@ namespace AttackTest {
 
         [SerializeField] private List<CharacterHandler> prefabCharPlayer;
         [SerializeField] private List<CharacterHandler> prefabCharEnemy;
-        private CharacterHandler charPlayerHandle;
-        private CharacterHandler charEnemyHandle;
+        public CharacterHandler charPlayerHandle;
+        public CharacterHandler charEnemyHandle;
         private CharacterHandler activeCharHandle;
         public StateAttack state;
 
@@ -79,15 +79,15 @@ namespace AttackTest {
 
         private void Update()
         {
-            if (state == StateAttack.WaitingPlayer) {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    state = StateAttack.Progress;
-                    charPlayerHandle.Attack(charEnemyHandle, () => {
-                        ChooseNextChar();
-                    });
-                }
-            }
+            //if (state == StateAttack.WaitingPlayer) {
+            //    if (Input.GetKeyDown(KeyCode.Space))
+            //    {
+            //        state = StateAttack.Progress;
+            //        charPlayerHandle.AttackAction(charEnemyHandle, () => {
+            //            ChooseNextChar();
+            //        });
+            //    }
+            //}
             
         }
         public CharacterHandler SpawnCharacter(bool isPlayerTeam)
@@ -114,7 +114,7 @@ namespace AttackTest {
             activeCharHandle = characterHandler;
         }
 
-        private void ChooseNextChar()
+        public void ChooseNextChar()
         {
             if (state == StateAttack.Done) return;
 
@@ -130,7 +130,7 @@ namespace AttackTest {
                 SetActiveChar(charEnemyHandle);
                 state = StateAttack.Progress;
 
-                charEnemyHandle.Attack(charPlayerHandle, () => {
+                charEnemyHandle.AttackAction(charPlayerHandle, () => {
                     ChooseNextChar();
                 });
             }
