@@ -53,6 +53,10 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 610570b0e0ed2c34f8d2d8f359147038, type: 3}
   - name: attack
     audioClip: {fileID: 8300000, guid: 7fe52124dc857fe4c964fc354e7695a9, type: 3}
+  - name: heal
+    audioClip: {fileID: 8300000, guid: b4fc5f17bab8f0746b89ecef921bbff5, type: 3}
+  - name: defend
+    audioClip: {fileID: 8300000, guid: 913ccedfce201cd4fab7a17fcc795cf1, type: 3}
   - name: end
     audioClip: {fileID: 8300000, guid: 968f92be42bbb2a479f317588568efdd, type: 3}
 --- !u!1 &3805829047539989385

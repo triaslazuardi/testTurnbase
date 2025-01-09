@@ -230,9 +230,6 @@ MonoBehaviour:
   objWinLose: {fileID: 526149265505621247}
   objPlay: {fileID: 6124489215480115970}
   objBlock: {fileID: 8889396770213248237}
-  toggleServer: {fileID: 7505257507929594114}
-  toggleSoundBgm: {fileID: 0}
-  toggleSoundSfx: {fileID: 0}
   txtWinLose: {fileID: 2293857130039761503}
   canvasUI: {fileID: 2417538235311299481}
 --- !u!225 &2417538235311299481
@@ -572,7 +569,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Button Space for Attack
+  m_text: Press Button for Play Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

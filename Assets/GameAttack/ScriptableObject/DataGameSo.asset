@@ -18,11 +18,11 @@ MonoBehaviour:
   reachedDistance: 0.1
   rangeDistance: 7
   vecFx: {x: -7, y: -3, z: 0}
-  damageVal: 280000001e00000014000000
+  damageVal: 0f0000000d0000000a000000
   defVal:
-  - 25
-  - 20
-  - 15
+  - 12
+  - 9
+  - 7
   healthVal:
   - 20
   - 15

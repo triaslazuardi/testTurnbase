@@ -75,22 +75,10 @@ namespace AttackTest {
             scrUi.SetDefault();
             SoundManager.instance.PlaySFX("play");
             isProgress = false;
+            scrState.UpdateTurn(true);
         }
 
 
-        private void Update()
-        {
-            //if (state == StateAttack.WaitingPlayer) {
-            //    if (Input.GetKeyDown(KeyCode.Space))
-            //    {
-            //        state = StateAttack.Progress;
-            //        charPlayerHandle.AttackAction(charEnemyHandle, () => {
-            //            ChooseNextChar();
-            //        });
-            //    }
-            //}
-            
-        }
         public CharacterHandler SpawnCharacter(bool isPlayerTeam)
         {
             Vector3 position;
@@ -128,17 +116,77 @@ namespace AttackTest {
 
             if (activeCharHandle == charPlayerHandle)
             {
+                //scrState.UpdateTurn(false);
                 SetActiveChar(charEnemyHandle);
                 state = StateAttack.Progress;
 
-                charEnemyHandle.AttackAction(charPlayerHandle, () => {
-                    ChooseNextChar();
-                });
+                EnemyTurn();
             }
             else {
+                scrState.UpdateTurn(true);
                 SetActiveChar(charPlayerHandle);
                 state = StateAttack.WaitingPlayer;
             }
+        }
+
+        private void EnemyTurn() {
+            int decideAction = 0;
+
+            if (charEnemyHandle.lastAction == 1 && charEnemyHandle.healthCharacter.GetValHP() >= 50)
+            {
+                decideAction = Random.Range(0, 2) == 0 ? 0 : 2;
+            }
+
+            if (charEnemyHandle.lastAction == 2)
+            {
+                decideAction = Random.Range(0, 2);
+            }
+
+            if (charEnemyHandle.healthCharacter.GetValHP() < 30f) 
+            {
+                decideAction = Random.Range(0, 10) < 7 ? 1 : 0;
+            }
+            else if (charPlayerHandle.lastAction == 2) {
+                decideAction = Random.Range(0, 10) < 8 ? 0 : 2;
+            }else 
+            {
+                int action = Random.Range(0, 10);
+                if (action >= 3 && action < 5) decideAction = 2;   
+                else if (action >= 5 && action < 7 ) decideAction = 1;   
+                else decideAction = 0;
+
+                Debug.Log("Decide action : " + action);
+            }
+
+            Debug.Log("Decide : " + decideAction);
+
+            switch (decideAction) { 
+                case 0:
+                    charEnemyHandle.AttackAction(charPlayerHandle, () => {
+                        scrState.UpdateTextActionEnemy("");
+                        ChooseNextChar();
+                    });
+                    scrState.UpdateTextActionEnemy("Attack");
+                    break;
+                case 1:
+                    charEnemyHandle.HealthAction(charEnemyHandle, () => {
+                        scrState.UpdateTextActionEnemy("");
+                        ChooseNextChar();
+                    });
+                    scrState.UpdateTextActionEnemy("Recovery");
+                    break;
+                case 2:
+                    charEnemyHandle.DefenseAction(charEnemyHandle, () => {
+                        scrState.UpdateTextActionEnemy("");
+                        ChooseNextChar();
+                    });
+                    scrState.UpdateTextActionEnemy("Defense");
+                    break;
+            }
+
+            
+
+            
         }
 
         private bool BattleOver() { 

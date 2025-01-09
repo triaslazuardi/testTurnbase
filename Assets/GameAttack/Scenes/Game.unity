@@ -1415,6 +1415,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imgTurnPlayer: {fileID: 1156568950}
   imgTurnEnemy: {fileID: 489233838}
+  colorTurn:
+  - {r: 0.40908194, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.2096878, b: 0, a: 1}
   textHP_Player: {fileID: 1903248288}
   textATK_Player: {fileID: 703328897}
   textDEF_Player: {fileID: 1212414518}
@@ -1423,6 +1426,8 @@ MonoBehaviour:
   textATK_Enemy: {fileID: 432591897}
   textDEF_Enemy: {fileID: 1483424020}
   textHEALTH_Enemy: {fileID: 1454568231}
+  textAction_Enemy: {fileID: 1232310823}
+  blinkDuration: 0.25
 --- !u!1 &640978741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,7 +3121,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ATTACK
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

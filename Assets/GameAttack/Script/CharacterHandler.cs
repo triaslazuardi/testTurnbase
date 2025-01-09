@@ -10,7 +10,7 @@ namespace AttackTest.Character {
     public class CharacterHandler : MonoBehaviour
     {
         [SerializeField] private CharacterBase baseCharacter;
-        [SerializeField] private CharacterStatus healthCharacter;
+        public CharacterStatus healthCharacter;
         [SerializeField] private Transform transformCharacter;
         [SerializeField] private Transform transformSign;
 
@@ -19,6 +19,7 @@ namespace AttackTest.Character {
         private UnityAction onSlideComplete;
 
         public bool IsPlayer = false;
+        public int lastAction = -1; //0: atk, 1:heal 2:def
 
         private void Update()
         {
@@ -31,7 +32,7 @@ namespace AttackTest.Character {
                 case StateSliding.Sliding:
                     transform.position += (slideTargetPosition-GetPosition()) * BattleHandler.instance.dtGame.slideSpeed * Time.deltaTime;
 
-                    Debug.Log("[Distance] " + Vector3.Distance(GetPosition(), slideTargetPosition) + ", reach : " + BattleHandler.instance.dtGame.reachedDistance);
+                    //Debug.Log("[Distance] " + Vector3.Distance(GetPosition(), slideTargetPosition) + ", reach : " + BattleHandler.instance.dtGame.reachedDistance);
                     if (Vector3.Distance(GetPosition(), slideTargetPosition) <= BattleHandler.instance.dtGame.reachedDistance) {
                         transform.position = slideTargetPosition;
                         onSlideComplete?.Invoke();
@@ -89,6 +90,7 @@ namespace AttackTest.Character {
 
             SlideToPosition(slideTargetposition, () =>
             {
+                lastAction = 0;
                 state = StateSliding.Progress;
                 Vector3 attactDir = (targetChar.GetPosition() - GetPosition().normalized);
                 baseCharacter.CHaracterAttact(attactDir,() => {
@@ -112,6 +114,7 @@ namespace AttackTest.Character {
         }
 
         public void DefenseAction(CharacterHandler targetChar, UnityAction OnAttackComplete = null) {
+            lastAction = 2;
             var fxItem = LeanPool.Spawn(BattleHandler.instance.dtGame.fxDefense, targetChar.transform);
             fxItem.transform.localPosition = Vector2.zero;
             healthCharacter.GetDEF();
@@ -122,6 +125,7 @@ namespace AttackTest.Character {
 
         public void HealthAction(CharacterHandler targetChar, UnityAction OnAttackComplete = null)
         {
+            lastAction = 1;
             var fxItem = LeanPool.Spawn(BattleHandler.instance.dtGame.fxHealRecovery, targetChar.transform);
             fxItem.transform.localPosition = Vector2.zero;
             healthCharacter.GetHEALTH();

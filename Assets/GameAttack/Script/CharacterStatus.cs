@@ -54,11 +54,13 @@ namespace AttackTest.Character {
 
         public void GetDEF() { 
             isDEF = true;
+            SoundManager.instance.PlaySFX("defend");
         }
 
         public void GetHEALTH()
         {
             SetAmountHealth(HP + HEALTH);
+            SoundManager.instance.PlaySFX("heal");
         }
 
         private void SetAmountHealth(float amount)
