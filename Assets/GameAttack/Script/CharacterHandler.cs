@@ -111,15 +111,23 @@ namespace AttackTest.Character {
             });
         }
 
-        public void DefenseAction(UnityAction OnAttackComplete = null) {
+        public void DefenseAction(CharacterHandler targetChar, UnityAction OnAttackComplete = null) {
+            var fxItem = LeanPool.Spawn(BattleHandler.instance.dtGame.fxDefense, targetChar.transform);
+            fxItem.transform.localPosition = Vector2.zero;
             healthCharacter.GetDEF();
-            OnAttackComplete?.Invoke();
+            fxItem.RunFx(()=> {
+                OnAttackComplete?.Invoke();
+            });
         }
 
-        public void HealthAction(UnityAction OnAttackComplete = null)
+        public void HealthAction(CharacterHandler targetChar, UnityAction OnAttackComplete = null)
         {
+            var fxItem = LeanPool.Spawn(BattleHandler.instance.dtGame.fxHealRecovery, targetChar.transform);
+            fxItem.transform.localPosition = Vector2.zero;
             healthCharacter.GetHEALTH();
-            OnAttackComplete?.Invoke();
+            fxItem.RunFx(() => {
+                OnAttackComplete?.Invoke();
+            });
         }
 
         private void SlideToPosition(Vector3 _targetPos, UnityAction _OnSlideComplete) { 

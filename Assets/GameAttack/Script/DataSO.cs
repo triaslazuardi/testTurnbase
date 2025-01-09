@@ -27,6 +27,8 @@ namespace AttackTest.So {
 
         [Header("Fx")]
         public FxManage fxBlood = null;
+        public FxManage fxHealRecovery = null;
+        public FxManage fxDefense = null;
 
 
         public float GetRandomeDamage() {

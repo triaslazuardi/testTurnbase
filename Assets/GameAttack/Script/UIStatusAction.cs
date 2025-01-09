@@ -87,7 +87,7 @@ namespace AttackTest
             if (BattleHandler.instance.state != StateAttack.WaitingPlayer) return;
             BattleHandler.instance.state = StateAttack.Progress;
 
-            BattleHandler.instance.charPlayerHandle.DefenseAction(() => {
+            BattleHandler.instance.charPlayerHandle.DefenseAction(BattleHandler.instance.charPlayerHandle, () => {
                 BattleHandler.instance.ChooseNextChar();
             });
         }
@@ -97,7 +97,7 @@ namespace AttackTest
             if (BattleHandler.instance.state != StateAttack.WaitingPlayer) return;
             BattleHandler.instance.state = StateAttack.Progress;
 
-            BattleHandler.instance.charPlayerHandle.HealthAction(() => {
+            BattleHandler.instance.charPlayerHandle.HealthAction(BattleHandler.instance.charPlayerHandle,() => {
                 BattleHandler.instance.ChooseNextChar();
             });
         }
