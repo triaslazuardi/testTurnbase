@@ -28,9 +28,9 @@ MonoBehaviour:
   - 15
   - 10
   increaseVal:
-  - 4
   - 3
   - 2
+  - 1
   delay1: 0.125
   fxBlood: {fileID: 97939967627068675, guid: 8720272435a124b48bc44974b5b81623, type: 3}
   fxHealRecovery: {fileID: 7965967212677740760, guid: ee96fe3e8cbe36d4ea86563130225a6c, type: 3}

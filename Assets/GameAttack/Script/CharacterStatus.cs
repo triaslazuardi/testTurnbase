@@ -50,17 +50,21 @@ namespace AttackTest.Character {
             }
 
             SetAmountHealth(HP-amount);
+
+            SetIncrease();
         }
 
         public void GetDEF() { 
             isDEF = true;
             SoundManager.instance.PlaySFX("defend");
+            SetIncrease();
         }
 
         public void GetHEALTH()
         {
             SetAmountHealth(HP + HEALTH);
             SoundManager.instance.PlaySFX("heal");
+            SetIncrease();
         }
 
         private void SetAmountHealth(float amount)
@@ -83,9 +87,10 @@ namespace AttackTest.Character {
         }
 
         public void SetIncrease() {
+            Debug.Log("increase : "+ countAction);
             if (countAction >= MaxIncreaseVal) {
                 countAction = 0;
-
+                Debug.Log("masukkkk : " + countAction);
                 ATK += PlusVal;
                 DEF += PlusVal;
                 HEALTH += PlusVal;
